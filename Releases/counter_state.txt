@@ -1,0 +1,1 @@
+{"CurrentSessionH": -0.9921568627450981, "CurrentSessionL": -0.9294117647058824, "AllTimeH": -1.0, "AllTimeL": -1.0}
