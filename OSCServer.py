@@ -55,8 +55,8 @@ def increment():
  
 def send_osc():
     global CurrentSessionH, CurrentSessionL, AllTimeH, AllTimeL, CurrentCounterDisplay
-    messageHigh = "/avatar/parameters/High"
-    messageLow = "/avatar/parameters/Low"
+    messageHigh = "/avatar/parameters/StatTrackHigh"
+    messageLow = "/avatar/parameters/StatTrackLow"
 
     if CurrentCounterDisplay == 0:
         client.send_message(messageHigh, float(CurrentSessionH))
@@ -70,14 +70,14 @@ def send_osc():
 def handle_signal(unused_addr, *args):
     print(f"Received OSC signal {unused_addr}: {args}")
  
-def handle_statrack_add(unused_addr, args):
+def handle_stattrack_add(unused_addr, args):
     global CurrentSessionH, CurrentSessionL, Loop
     print(f"Received add request with args: {args}")
     Loop = args
     if Loop == True:
         loop()
 
-def handle_statrack_alltime(unused_addr, args):
+def handle_stattrack_alltime(unused_addr, args):
     global CurrentSessionH, CurrentSessionL, CurrentCounterDisplay
     print(f"Received add request with args: {args}")
     if args == True:
@@ -86,10 +86,10 @@ def handle_statrack_alltime(unused_addr, args):
  
 def start_osc_listener():
     disp = dispatcher.Dispatcher()
-    disp.map("/avatar/parameters/High", handle_signal)
-    disp.map("/avatar/parameters/Low", handle_signal)
-    disp.map("/avatar/parameters/statrack_add", handle_statrack_add)
-   #disp.map("/avatar/parameters/statrack_alltime", handle_statrack_alltime)
+    disp.map("/avatar/parameters/StatTrackHigh", handle_signal)
+    disp.map("/avatar/parameters/StatTrackLow", handle_signal)
+    disp.map("/avatar/parameters/StatTrackAdd", handle_stattrack_add)
+   #disp.map("/avatar/parameters/StatTrackTap", handle_stattrack_alltime)
     server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", 9001), disp)
     print("Starting OSC server on port 9001...")
     server.serve_forever()
