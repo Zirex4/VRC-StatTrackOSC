@@ -89,7 +89,7 @@ def start_osc_listener():
     disp.map("/avatar/parameters/StatTrackHigh", handle_signal)
     disp.map("/avatar/parameters/StatTrackLow", handle_signal)
     disp.map("/avatar/parameters/StatTrackAdd", handle_stattrack_add)
-   #disp.map("/avatar/parameters/StatTrackTap", handle_stattrack_alltime)
+    disp.map("/avatar/parameters/StatTrackTap", handle_stattrack_alltime)
     server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", 9001), disp)
     print("Starting OSC server on port 9001...")
     server.serve_forever()
