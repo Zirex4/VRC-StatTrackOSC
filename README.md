@@ -1,3 +1,5 @@
+![ProductShowcase](https://github.com/Zirex4/VRC-StatTrackOSC/blob/main/Tutorial/Product.png )
+
 # VRC-StatTrackOSC Installation Guide
 
 This project allows you to track in-game stats via OSC when tilting your head back in VRChat. Follow the instructions below to add it to your avatar.
@@ -19,16 +21,25 @@ This project allows you to track in-game stats via OSC when tilting your head ba
 2. **Add to your avatar**  
    - Locate the newly imported prefab(s) or objects.  
    - Attach or parent them to your avatar in the appropriate spot (e.g., near the head, or wherever it’s meant to track).
+![Adding to the avatar](https://github.com/Zirex4/VRC-StatTrackOSC/blob/main/Tutorial/1.png  )
 
 3. **Adjust colliders**  
    - Find the collider objects included with the stattrack system.  
-   - Position them so that they make contact when your avatar’s head is tilted back in VRChat.  
+   - Position them so that they make contact when your avatar’s head is tilted back in VRChat.
+![Adjusting the colliders](https://github.com/Zirex4/VRC-StatTrackOSC/blob/main/Tutorial/2.png  )
+   
 
 4. **Resize and reposition**  
-   - Adjust the size and position of the stattrack visual or logic to match your avatar’s proportions.  
+   - Adjust the size and position of the stattrack visual or logic to match your avatar’s proportions.
+![Resizing Stattrack](https://github.com/Zirex4/VRC-StatTrackOSC/blob/main/Tutorial/3.png  )
 
 5. **Upload your avatar**  
    - Use the standard VRChat Creator Companion / Unity upload process once everything is set up.
+  
+6. **Test it ingame**
+   - Use the Collider view overlay under Options>Avatar to check for the desired angle to trigger the StatTrack
+![Not Colliding](https://github.com/Zirex4/VRC-StatTrackOSC/blob/main/Tutorial/Test_1.png  )
+![Colliding](https://github.com/Zirex4/VRC-StatTrackOSC/blob/main/Tutorial/Test_2.png  )
 
 ---
 
