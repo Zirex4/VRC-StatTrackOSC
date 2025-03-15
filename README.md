@@ -58,6 +58,16 @@ This project allows you to track in-game stats via OSC when tilting your head ba
 
 ---
 
+## Information
+
+Number of Materials: 2
+- Counter material
+- Mesh material
+  
+Number of Triangles: 988
+
+---
+
 ## Troubleshooting
 
 - If the OSC server does not receive data, double-check that:
