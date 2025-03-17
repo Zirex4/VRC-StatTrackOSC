@@ -17,6 +17,8 @@ Loop = False
 Loop_aux = True
 
 Time_speed = 1 # Seconds to sleep while triggering the collider
+
+StatTrackEnabled = 1
  
 # OSC client setup for sending messages to VRChat on port 9000
 client = udp_client.SimpleUDPClient("127.0.0.1", 9000)
@@ -76,10 +78,16 @@ def handle_stattrack_add(unused_addr, args):
     Loop = args
     if Loop == True:
         loop()
+        
+def handle_stattrack_enabler(unused_addr, args):
+    global StatTrackEnabled
+    print(f"Received Enabled request with args: {args}")
+    if args == True:
+        StatTrackEnabled = 1 if StatTrackEnabled == 0 else 0
 
 def handle_stattrack_alltime(unused_addr, args):
     global CurrentSessionH, CurrentSessionL, CurrentCounterDisplay
-    print(f"Received add request with args: {args}")
+    print(f"Received Tap request with args: {args}")
     if args == True:
         CurrentCounterDisplay = 1 if CurrentCounterDisplay == 0 else 0
         send_osc()
@@ -90,19 +98,21 @@ def start_osc_listener():
     disp.map("/avatar/parameters/StatTrackLow", handle_signal)
     disp.map("/avatar/parameters/StatTrackAdd", handle_stattrack_add)
     disp.map("/avatar/parameters/StatTrackTap", handle_stattrack_alltime)
+    disp.map("/avatar/parameters/StatTrackEnabler", handle_stattrack_enabler)
     server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", 9001), disp)
     print("Starting OSC server on port 9001...")
     server.serve_forever()
  
 def loop():
-    global Loop, Time_speed
-    while Loop:
-            try:
-                increment()
-                send_osc()
-                time.sleep(Time_speed)
-            except (ValueError, TypeError, IndexError) as e:
-                print(f"Error processing incoming data: {e}")
+    global Loop, Time_speed, StatTrackEnabled
+    if StatTrackEnabled:
+        while Loop:
+                try:
+                    increment()
+                    send_osc()
+                    time.sleep(Time_speed)
+                except (ValueError, TypeError, IndexError) as e:
+                    print(f"Error processing incoming data: {e}")
  
 def load_state():
     """Load the state from the counter_state.txt file if it exists."""
